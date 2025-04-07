@@ -54,7 +54,7 @@ class TripTest extends TestCase
     {
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->token
-        ])->getJson('/api/trips');
+        ])->postJson('/api/trips/index');
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data']);
