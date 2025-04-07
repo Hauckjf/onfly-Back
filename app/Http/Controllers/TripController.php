@@ -73,11 +73,11 @@ class TripController extends Controller
         DB::beginTransaction();
 
         try {
-            if (!auth()->user()->isAdmin()) {
+            if (!auth()->user()->hasRole('admin')) {
                 return response()->json(['error' => 'Unauthorized'], 403);
             }
 
-            $trip = $this->tripService->updateStatus($id, $request->status);
+            $trip = $this->tripService->updateStatus($id, $request->validated('status'));
             DB::commit();
 
             return response()->json(['data' => $trip], 200);

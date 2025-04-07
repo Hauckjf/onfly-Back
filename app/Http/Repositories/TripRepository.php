@@ -40,7 +40,7 @@ class TripRepository
     public function updateStatus($id, $status)
     {
         $trip = $this->show($id);
-        $trip->update(['status' => $status]);
+        $trip->update(['status' => $status['status']]);
         return $trip;
     }
 }

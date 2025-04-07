@@ -10,17 +10,19 @@ class Trip extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'user_id',
         'destination',
-        'start_date',
-        'end_date',
+        'startDate',
+        'endDate',
         'status'
     ];
 
     protected $casts = [
-        'start_date' => 'date:Y-m-d',
-        'end_date' => 'date:Y-m-d',
+        'startDate' => 'date:Y-m-d',
+        'endDate' => 'date:Y-m-d',
         'status' => TripStatus::class
     ];
 

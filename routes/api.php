@@ -22,9 +22,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{trip}', [TripController::class, 'show']);
         Route::post('/', [TripController::class, 'store']);
         Route::put('/{trip}', [TripController::class, 'update']);
+        Route::put('/{trip}/status', [TripController::class, 'updateStatus'])
+        ->middleware('role:admin');
     });
 
-    Route::middleware('can:updateStatus,trip')->group(function () {
-        Route::put('/trips/{trip}/status', [TripController::class, 'updateStatus']);
-    });
 });

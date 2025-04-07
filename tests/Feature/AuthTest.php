@@ -109,7 +109,7 @@ class AuthTest extends TestCase
 
     public function test_rate_limiting_login()
     {
-        $email = 'rate'.Str::random(3).'@example.com';
+        $email = 'rate_'.Str::random(3).'@example.com';
         $validPassword = 'ValidPass123!@#';
 
         User::factory()->create([
@@ -117,21 +117,24 @@ class AuthTest extends TestCase
             'password' => bcrypt($validPassword)
         ]);
 
+        $ip = '127.0.0.1';
         $limiter = app(\Illuminate\Cache\RateLimiter::class);
-        $limiter->clear($email);
+        $limiter->clear('login:'.$ip);
 
-        $maxAttempts = 20;
-        $attempts = $maxAttempts + 2;
+        $maxAttempts = 5;
 
-        // 5. Executa tentativas
-        for ($i = 0; $i < $attempts; $i++) {
+        for ($i = 0; $i < $maxAttempts; $i++) {
             $response = $this->postJson('/api/auth/login', [
                 'email' => $email,
                 'password' => 'WrongPass123!@#'
             ]);
-
+            $response->assertStatus(401);
         }
 
+        $response = $this->postJson('/api/auth/login', [
+            'email' => $email,
+            'password' => 'WrongPass123!@#'
+        ]);
         $response->assertStatus(429);
     }
 

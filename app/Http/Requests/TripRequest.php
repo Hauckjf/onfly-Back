@@ -15,8 +15,8 @@ class TripRequest extends FormRequest
     {
         return [
             'destination' => 'required|string|max:255',
-            'start_date' => 'required|date|after_or_equal:today',
-            'end_date' => 'required|date|after:start_date',
+            'startDate' => 'required|date|after_or_equal:today',
+            'endDate' => 'required|date|after:startDate',
         ];
     }
 }

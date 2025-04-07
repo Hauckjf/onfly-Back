@@ -14,8 +14,8 @@ class TripFactory extends Factory
         return [
             'user_id' => \App\Models\User::factory(),
             'destination' => $this->faker->city,
-            'start_date' => now()->addDays(1),
-            'end_date' => now()->addDays(5),
+            'startDate' => now()->addDays(1),
+            'endDate' => now()->addDays(5),
         ];
     }
 }

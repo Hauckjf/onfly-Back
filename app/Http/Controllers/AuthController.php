@@ -28,23 +28,24 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $executed = RateLimiter::attempt(
-            'login:'.$request->ip(),
-            5,
-            function() use ($request) {
-                $response = $this->authService->login($request->validated());
-                return $response ?: response()->json(['error' => 'Credenciais inválidas'], 401);
-            },
-            60
-        );
+        $key = 'login:' . $request->ip();
 
-        if (!$executed) {
+        if (RateLimiter::tooManyAttempts($key, 5)) {
             return response()->json([
-                'error' => 'Muitas tentativas. Tente novamente em '.RateLimiter::availableIn('login:'.$request->ip()).' segundos'
+                'error' => 'Muitas tentativas. Tente novamente em ' . RateLimiter::availableIn($key) . ' segundos'
             ], 429);
         }
 
-        return $executed;
+        RateLimiter::hit($key, 60);
+
+        $response = $this->authService->login($request->validated());
+
+        if (!$response) {
+            return response()->json(['error' => 'Credenciais inválidas'], 401);
+        }
+
+        RateLimiter::clear($key);
+        return $response;
     }
 
     public function logout()
