@@ -6,12 +6,21 @@ use App\Models\Trip;
 use App\Helpers\FilterHandler;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class TripRepository
 {
     public function index($paginate, $filters, $orderBy)
     {
-        $query = Trip::query();
+
+        if (!auth()->user()->hasRole('admin')) {
+            $query = Trip::where('user_id', Auth::id());
+        }
+        else
+        {
+            $query = Trip::query();
+        }
+
         $filterHandler = new FilterHandler;
 
         $query = $filterHandler->applyFilter($query, $filters);
@@ -22,7 +31,12 @@ class TripRepository
 
     public function show($id)
     {
-        return Trip::findOrFail($id);
+        if (auth()->user()->hasRole('admin')) {
+            return Trip::findOrFail($id);
+        } else {
+            return Trip::where('user_id', Auth::id())->where('id', $id)->firstOrFail();
+        }
+
     }
 
     public function store($data)
@@ -32,6 +46,7 @@ class TripRepository
 
     public function update($id,$data)
     {
+
         $trip = $this->show($id);
         $trip->update($data);
         return $trip;
