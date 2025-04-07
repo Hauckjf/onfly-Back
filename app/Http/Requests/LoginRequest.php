@@ -16,7 +16,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email|max:25',
+            'email' => 'required|string|email',
             'password' => 'required',
         ];
     }
@@ -26,7 +26,6 @@ class LoginRequest extends FormRequest
         return [
             'email.required' => 'O e-mail é obrigatório',
             'email.email' => 'Informe um e-mail válido',
-            'email.max' => 'O e-mail não pode exceder 25 caracteres',
             'password.required' => 'A senha é obrigatória'
         ];
     }

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('destination');
-            $table->date('startDate');
-            $table->date('endDate');
+            $table->datetime('startDate');
+            $table->datetime('endDate');
             $table->enum('status', ['solicitado', 'confirmado', 'cancelado'])->default('solicitado');
             $table->timestamps();
         });

@@ -11,12 +11,13 @@ class AuthRepository
     {
         $user = User::create($request);
         $user->assignRole('user');
+
         return $user;
     }
 
     public function login($request)
     {
-        return User::where('email', $request)->first();
+        return User::with('roles')->where('email', $request)->first();
     }
 
     public function createAuthToken($user)

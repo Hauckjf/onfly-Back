@@ -21,8 +21,8 @@ class Trip extends Model
     ];
 
     protected $casts = [
-        'startDate' => 'date:Y-m-d',
-        'endDate' => 'date:Y-m-d',
+        'startDate' => 'datetime:Y-m-d\TH:i',
+        'endDate' => 'datetime:Y-m-d\TH:i',
         'status' => TripStatus::class
     ];
 
