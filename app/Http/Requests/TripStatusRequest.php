@@ -14,7 +14,7 @@ class TripStatusRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'required|in:solicitado,confirmado,cancelado',
+            'status' => 'required|in:solicitado,aprovado,cancelado',
         ];
     }
 }

@@ -119,11 +119,11 @@ class TripTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $adminToken
         ])->putJson('/api/trips/' . $this->trip->id . '/status', [
-            'status' => 'confirmado'
+            'status' => 'aprovado'
         ]);
 
         $response->assertStatus(200)
-            ->assertJson(['data' => ['status' => 'confirmado']]);
+            ->assertJson(['data' => ['status' => 'aprovado']]);
     }
 
     public function test_unauthorized_update_status()
@@ -131,7 +131,7 @@ class TripTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->token
         ])->putJson('/api/trips/' . $this->trip->id . '/status', [
-            'status' => 'confirmado'
+            'status' => 'aprovado'
         ]);
 
         $response->assertStatus(403);

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('destination');
             $table->datetime('startDate');
             $table->datetime('endDate');
-            $table->enum('status', ['solicitado', 'confirmado', 'cancelado'])->default('solicitado');
+            $table->enum('status', ['solicitado', 'aprovado', 'cancelado'])->default('solicitado');
             $table->timestamps();
         });
     }
