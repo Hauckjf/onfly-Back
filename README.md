@@ -1,66 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 Onfly
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema Full Stack para gestão de pedidos de viagens corporativas. Desenvolvido como parte de um desafio técnico, o projeto conta com uma API REST robusta em Laravel e uma interface moderna construída com Vue.js + Vite + TypeScript.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📚 Sumário
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Visão Geral](#visão-geral)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Como Executar o Projeto](#como-executar-o-projeto)
+- [Variáveis de Ambiente](#variáveis-de-ambiente)
+- [Rodando os Testes](#rodando-os-testes)
+- [Screenshots](#screenshots)
+- [Considerações Finais](#considerações-finais)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📖 Visão Geral
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+O Sistema permite que usuários corporativos criem, visualizem e gerenciem pedidos de viagem. A aplicação possui autenticação via JWT, controle de permissões por papel, user ou admin,
+ notificação de status e interface com filtros interativos, oferecendo uma experiência completa e fluida.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Estrategias e Planejamento:
+https://excalidraw.com/#json=2YGb3MrifGU_hrZqjGMoM,ZFDaZhOT7-aPK8ITHj3DcA
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ✅ Funcionalidades
 
-## Laravel Sponsors
+### 🔒 Autenticação (JWT)
+- Login e registro com tokens protegidos via Laravel Sanctum
+- Rotas protegidas com controle de acesso (usuário e admin)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 📝 Gestão de Viagens
+- Criação de pedidos de viagem (com destino, datas e status)
+- Listagem com filtros por status, período e destino
+- Visualização de pedido individual
+- Atualização de status para “aprovado” ou “cancelado” (restrita a admins)
+- Regras de negócio: impossibilidade de cancelar pedidos já aprovados caso não for um admin
+- Cada usuário pode ver, criar e editar apenas seus próprios pedidos
 
-### Premium Partners
+### 🔔 Notificações
+- Envio de notificação visual ao usuário em caso de aprovação ou cancelamento de pedidos
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 🧪 Testes
+- Testes unitários e de feature cobrindo autenticação e fluxo de pedidos
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠️ Tecnologias Utilizadas
 
-## Code of Conduct
+### Backend
+- **Laravel 10**
+- **Sanctum** (Autenticação JWT)
+- **MySQL**
+- **PHPUnit**
+- **Docker** (PHP + NGINX + MySQL)
+- **Spatie Laravel Permission** (controle de papéis e permissões)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Frontend
+- **Vue 3** + **Vite**
+- **TypeScript**
+- **Tailwind CSS**
+- **Pinia** (state management)
+- **Axios**
+- **Universal-Cookie** (gerenciamento de cookies)
+- **Toastify-js** (notificações visuais)
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## ▶️ Como Executar o Projeto
 
-## License
+### Pré-requisitos
+- Docker + Docker Compose
+- Node.js e npm instalados
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Clonando o Repositório
+
+```bash Front
+git clone https://github.com/Hauckjf/onfly-Front.git
+cd onfly-Front
+npm install
+docker-compose up -d
+
+
+```bash Backend
+git clone https://github.com/Hauckjf/onfly-Back.git
+cd onfly-Back
+docker-compose exec app bash
+composer install
+php artisan migrate:refresh --seed
+exit
+docker-compose up -d
