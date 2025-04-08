@@ -18,7 +18,7 @@ class TripRepository
         }
         else
         {
-            $query = Trip::query();
+            $query = Trip::with('user');
         }
 
         $filterHandler = new FilterHandler;
