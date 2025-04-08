@@ -34,7 +34,7 @@ class TripRepository
         if (auth()->user()->hasRole('admin')) {
             return Trip::findOrFail($id);
         } else {
-            return Trip::where('user_id', Auth::id())->where('id', $id)->firstOrFail();
+            return Trip::with('user')->where('user_id', Auth::id())->where('id', $id)->firstOrFail();
         }
 
     }
